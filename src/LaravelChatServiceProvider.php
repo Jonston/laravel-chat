@@ -28,11 +28,8 @@ class LaravelChatServiceProvider extends ServiceProvider
             __DIR__.'/../database/migrations/create_chat_tables.php' => database_path('migrations/'.date('Y_m_d_His').'_create_chat_tables.php'),
         ], 'chat');
 
-        // Загрузка миграций (если нужно запускать напрямую)
+        // Регистрация консольных команд
         if ($this->app->runningInConsole()) {
-            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-
-            // Регистрация консольных команд
             $this->commands([
                 InstallChatCommand::class,
             ]);
