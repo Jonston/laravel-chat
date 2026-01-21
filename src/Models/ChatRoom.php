@@ -12,6 +12,7 @@ use Jonston\LaravelChat\Traits\HasChatMembers;
 class ChatRoom extends Model
 {
     use HasChatMembers;
+
     protected $fillable = [
         'name',
     ];
@@ -23,6 +24,6 @@ class ChatRoom extends Model
 
     public function messages()
     {
-        return $this->hasMany(ChatMessage::class, 'room_id');
+        return $this->hasMany(ChatRoomMessage::class, 'room_id');
     }
 }

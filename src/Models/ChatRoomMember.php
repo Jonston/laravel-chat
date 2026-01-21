@@ -26,4 +26,15 @@ class ChatRoomMember extends Model
     {
         return $this->morphTo();
     }
+
+    /**
+     * Create a ChatRoomMember wrapper for any Eloquent model instance.
+     */
+    public static function createForModel($model): self
+    {
+        return static::create([
+            'member_id' => $model->getKey(),
+            'member_type' => get_class($model),
+        ]);
+    }
 }

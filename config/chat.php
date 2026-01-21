@@ -1,5 +1,11 @@
 <?php
 
+use Jonston\LaravelChat\Models\ChatRoom;
+use Jonston\LaravelChat\Models\ChatRoomMessage;
+use Jonston\LaravelChat\Models\ChatRoomMember;
+use Jonston\LaravelChat\Models\ChatRoomGuest;
+use Jonston\LaravelChat\Models\ChatRoomBot;
+
 return [
 
     /*
@@ -12,25 +18,13 @@ return [
     | 'guests' => false). The migrations will respect these values.
     |
     */
-
     'tables' => [
         'rooms' => 'chat_rooms',
         'messages' => 'chat_room_messages',
         'members' => 'chat_room_members',
-        'guests' => 'chat_room_guests', //Set up to false or null to disable guests table
-        'bots' => 'chat_room_bots', //Set up to false or null to disable bots table
+        'guests' => 'chat_room_guests',
+        'bots' => 'chat_room_bots',
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | User Model
-    |--------------------------------------------------------------------------
-    |
-    | The user model used by the chat package.
-    |
-    */
-
-    'user_model' => env('CHAT_USER_MODEL', 'App\\Models\\User'),
 
     /*
     |--------------------------------------------------------------------------
@@ -40,59 +34,28 @@ return [
     | Pagination settings for messages and conversations.
     |
     */
-
     'pagination' => [
         'messages_per_page' => 50,
         'conversations_per_page' => 20,
     ],
 
-];
     /*
     |--------------------------------------------------------------------------
-    | Chat Tables
+    | Model Classes
     |--------------------------------------------------------------------------
     |
-    | Table names used by the chat package. If you do not want to use
-    | guests or bots, set the corresponding entry to `false` (e.g.:
-    | 'guests' => false). The migrations will respect these values.
+    | Default model classes used by the package. You can override these
+    | in your application config to use custom models. Use ::class where
+    | possible so static analysis and refactors work better.
     |
     */
-
-    'tables' => [
-        'rooms' => 'chat_rooms',
-        'messages' => 'chat_room_messages',
-        'members' => 'chat_room_members',
-        // Set to `false` to disable creating these tables via migration
-        'guests' => 'chat_room_guests',
-        'bots' => 'chat_room_bots',
-    ],
-        'guests' => 'chat_room_guests',
-        'bots' => 'chat_room_bots',
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | User Model
-    |--------------------------------------------------------------------------
-    |
-    | Модель пользователя для чата
-    |
-    */
-
-    'user_model' => env('CHAT_USER_MODEL', 'App\Models\User'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Pagination
-    |--------------------------------------------------------------------------
-    |
-    | Количество сообщений на странице
-    |
-    */
-
-    'pagination' => [
-        'messages_per_page' => 50,
-        'conversations_per_page' => 20,
+    'models' => [
+        'room' => ChatRoom::class,
+        'message' => ChatRoomMessage::class,
+        'member' => ChatRoomMember::class,
+        'guest' => ChatRoomGuest::class,
+        'bot' => ChatRoomBot::class,
+        'user' => env('CHAT_USER_MODEL', 'App\\Models\\User'),
     ],
 
 ];
